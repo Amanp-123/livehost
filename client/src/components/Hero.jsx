@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Sparkles, Loader2 } from 'lucide-react';
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  Sparkles, 
+  ShieldCheck, 
+  Activity, 
+  HeartPulse, 
+  Users, 
+  FileText, 
+  Stethoscope, 
+  Lock
+} from 'lucide-react';
 import { apiService } from '../services/api';
 import './Hero.css';
 
 export default function Hero() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
+  const [feedback, setFeedback] = useState({ type: '', message: '' });
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
     if (!email) return;
 
     setLoading(true);
-    setStatusMessage({ type: '', text: '' });
+    setFeedback({ type: '', message: '' });
 
     try {
-      const res = await apiService.subscribeLead(email);
-      if (res.success) {
-        setStatusMessage({ type: 'success', text: res.message });
+      const response = await apiService.subscribeLead(email);
+      if (response.success) {
+        setFeedback({ type: 'success', message: response.message || 'Hospital demo scheduled! Our clinical specialist will contact you.' });
         setEmail('');
       } else {
-        setStatusMessage({
-          type: 'error',
-          text: res.message || (res.errors && res.errors[0]?.msg) || 'Failed to submit'
-        });
+        setFeedback({ type: 'error', message: response.message || 'Email already requested demo.' });
       }
     } catch (err) {
-      setStatusMessage({ type: 'error', text: 'Server connection failed. Please ensure backend is running.' });
+      setFeedback({ type: 'error', message: 'Hospital network timeout. Please retry.' });
     } finally {
       setLoading(false);
     }
@@ -37,96 +45,205 @@ export default function Hero() {
     <section className="hero-section" id="early-access">
       <div className="container hero-container">
         
-        {/* Top Feature Pill */}
-        <div className="badge">
-          <span className="badge-dot"></span>
-          <span>Next-Gen Fullstack Architecture v2.0 Released</span>
-          <Sparkles size={14} style={{ color: '#ec4899' }} />
-        </div>
+        {/* Left Content */}
+        <div className="hero-content">
+          <div className="badge">
+            <span className="badge-dot"></span>
+            <HeartPulse size={15} />
+            <span>ABDM Certified • Next-Gen Hospital Operating System</span>
+          </div>
 
-        {/* Main Headline */}
-        <h1 className="hero-title">
-          Build & Scale Modern Web Apps <br />
-          <span className="text-gradient">With Enterprise Elegance</span>
-        </h1>
+          <h1 className="hero-title">
+            The Intelligent <span className="text-gradient">Hospital Operating System</span> For Modern Healthcare
+          </h1>
 
-        <p className="hero-subtitle">
-          Supercharge your development with a production-grade React frontend and ultra-fast Node/Express backend structure. Engineered for speed, clean code, and unstoppable growth.
-        </p>
+          <p className="hero-subtitle">
+            Unify OPD/IPD workflows, patient EHRs, intelligent OT scheduling, billing, and NABH compliance under one lightning-fast, secure cloud architecture.
+          </p>
 
-        {/* Lead Capture Interactive Form */}
-        <div className="hero-form-wrapper">
+          {/* Clinical Demo Form */}
           <form className="hero-form" onSubmit={handleSubscribe}>
-            <input 
-              type="email" 
-              placeholder="Enter your work email..." 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="hero-input"
-            />
-            <button type="submit" className="btn btn-primary hero-btn" disabled={loading}>
-              {loading ? (
-                <>
-                  <Loader2 size={18} className="spinner" /> Joining...
-                </>
-              ) : (
-                <>
-                  Get Early Access <ArrowRight size={18} />
-                </>
-              )}
-            </button>
+            <div className="input-wrap">
+              <input
+                type="email"
+                placeholder="Enter doctor / hospital work email..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="hero-input"
+              />
+              <button 
+                type="submit" 
+                className="btn btn-primary hero-btn"
+                disabled={loading}
+              >
+                {loading ? <span className="loader"></span> : <>Request Live Demo <ArrowRight size={18} /></>}
+              </button>
+            </div>
           </form>
 
-          {statusMessage.text && (
-            <div className={`status-alert ${statusMessage.type}`}>
-              {statusMessage.text}
+          {feedback.message && (
+            <div className={`form-feedback ${feedback.type}`}>
+              {feedback.type === 'success' ? <CheckCircle2 size={16} /> : <Sparkles size={16} />}
+              <span>{feedback.message}</span>
             </div>
           )}
+
+          {/* Trust Highlights */}
+          <div className="hero-trust">
+            <div className="trust-item">
+              <ShieldCheck size={16} className="text-emerald" />
+              <span>HIPAA & ISO 27001 Certified</span>
+            </div>
+            <div className="trust-item">
+              <Activity size={16} className="text-emerald" />
+              <span>99.99% Clinical Uptime SLA</span>
+            </div>
+            <div className="trust-item">
+              <Lock size={16} className="text-emerald" />
+              <span>End-to-End EHR Encryption</span>
+            </div>
+          </div>
         </div>
 
-        {/* Trust Badges */}
-        <div className="hero-trust">
-          <div className="trust-item">
-            <CheckCircle2 size={18} className="trust-icon" />
-            <span>Full REST API integration</span>
-          </div>
-          <div className="trust-item">
-            <Zap size={18} className="trust-icon" />
-            <span>Sub-millisecond latency</span>
-          </div>
-          <div className="trust-item">
-            <ShieldCheck size={18} className="trust-icon" />
-            <span>Production ready MVC setup</span>
-          </div>
-        </div>
-
-        {/* Hero Interactive Code/Dashboard Preview */}
+        {/* Right Preview - Live Clinical Dashboard Mockup */}
         <div className="hero-preview-wrapper">
           <div className="preview-glow"></div>
-          <div className="hero-preview glass-card">
-            <div className="preview-header">
-              <div className="dots">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
+          
+          <div className="ehr-console-card">
+            {/* Window Header */}
+            <div className="ehr-console-header">
+              <div className="ehr-dots">
+                <span className="dot dot-red"></span>
+                <span className="dot dot-yellow"></span>
+                <span className="dot dot-green"></span>
               </div>
-              <span className="preview-title">server/src/server.js • Express + React API Sync</span>
-              <span className="preview-badge">Live Ready</span>
+              <div className="ehr-header-title">
+                <HeartPulse size={16} className="pulse-icon" />
+                <span>mediOS Clinical EHR Console • AI Patient Telemetry</span>
+              </div>
+              <div className="ehr-live-badge">
+                <span className="live-dot"></span> LIVE OPD
+              </div>
             </div>
-            <div className="preview-code">
-              <pre>
-                <code>
-                  <span className="c-keyword">const</span> app = <span className="c-func">express</span>();<br />
-                  app.<span className="c-func">use</span>(<span className="c-func">cors</span>(&#123; origin: <span className="c-str">'http://localhost:5173'</span> &#125;));<br />
-                  app.<span className="c-func">use</span>(<span className="c-str">'/api'</span>, apiRoutes);<br />
-                  <span className="c-comment">// Handshake established with React Client layer ⚡</span><br />
-                  app.<span className="c-func">listen</span>(PORT, () =&gt; console.<span className="c-func">log</span>(<span className="c-str">'✨ NovaStack is running'</span>));
-                </code>
-              </pre>
+
+            {/* Metrics Ribbon */}
+            <div className="ehr-metrics-row">
+              <div className="ehr-metric-box">
+                <div className="metric-top">
+                  <span className="metric-title">Active Inpatients</span>
+                  <span className="metric-pill">82.6% Bed Occupancy</span>
+                </div>
+                <div className="metric-value">248 <span className="metric-total">/ 300</span></div>
+              </div>
+
+              <div className="ehr-metric-box">
+                <div className="metric-top">
+                  <span className="metric-title">OPD Queue Today</span>
+                  <span className="metric-pill info">Avg Wait: 8.4m</span>
+                </div>
+                <div className="metric-value">1,420 <span className="metric-total">Checked In</span></div>
+              </div>
+
+              <div className="ehr-metric-box">
+                <div className="metric-top">
+                  <span className="metric-title">Critical ICU Alerts</span>
+                  <span className="metric-pill safe">0 Stable</span>
+                </div>
+                <div className="metric-value safe-text">Real-time <span className="metric-total">Telemetry</span></div>
+              </div>
             </div>
+
+            {/* Patient Telemetry Table */}
+            <div className="ehr-table-wrapper">
+              <table className="ehr-table">
+                <thead>
+                  <tr>
+                    <th>Patient ID & Ward</th>
+                    <th>Live Vitals (BP • SpO2 • Pulse)</th>
+                    <th>Attending Specialist</th>
+                    <th className="text-right">Clinical Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className="patient-id-cell">
+                        <strong>#MED-9021</strong>
+                        <span>ICU Bed 04</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="vitals-badge">
+                        <Activity size={14} />
+                        <span>120/80 mmHg • 99% • 72 bpm</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="doc-cell">
+                        <span>Dr. Vikram Mehta</span>
+                        <small>Chief Cardiologist</small>
+                      </div>
+                    </td>
+                    <td className="text-right">
+                      <span className="status-badge-stable">Stable</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div className="patient-id-cell">
+                        <strong>#MED-8842</strong>
+                        <span>OPD Room 12</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="vitals-badge normal">
+                        <Activity size={14} />
+                        <span>115/76 mmHg • 98% • 78 bpm</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="doc-cell">
+                        <span>Dr. Sarah Jenkins</span>
+                        <small>Sr. Neurologist</small>
+                      </div>
+                    </td>
+                    <td className="text-right">
+                      <span className="status-badge-consulting">In Consultation</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div className="patient-id-cell">
+                        <strong>#MED-7719</strong>
+                        <span>Emergency ER-02</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="vitals-badge normal">
+                        <Activity size={14} />
+                        <span>122/82 mmHg • 99% • 70 bpm</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="doc-cell">
+                        <span>Dr. Rajeshwar Rao</span>
+                        <small>Trauma Specialist</small>
+                      </div>
+                    </td>
+                    <td className="text-right">
+                      <span className="status-badge-triaged">Triaged</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </div>
+
 
       </div>
     </section>

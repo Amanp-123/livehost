@@ -1,32 +1,42 @@
 import React from 'react';
-import { Layers, Database, Shield, ArrowRight, Code, Globe, Terminal } from 'lucide-react';
+import { 
+  HeartPulse, 
+  ShieldCheck, 
+  Activity, 
+  Database, 
+  Server, 
+  Cpu, 
+  Lock, 
+  Network, 
+  Workflow
+} from 'lucide-react';
 import './Architecture.css';
 
 export default function Architecture() {
-  const layers = [
+  const hospitalLayers = [
     {
-      title: "1. Presentation Layer (React + Vite)",
-      desc: "Componentized UI featuring custom hooks, glassmorphic layout system, and lightning-fast HMR bundled for top-tier Core Web Vitals.",
-      icon: <Layers size={22} className="layer-icon" />,
-      tag: "Client-Side"
+      title: "1. Doctor & Clinical Presentation Layer",
+      desc: "Zero-latency React clinical console with touch-friendly OPD token kiosks, OT displays, and nurse bedside tablets with instant offline sync.",
+      icon: <HeartPulse size={22} className="layer-icon" style={{ color: '#10b981' }} />,
+      tag: "Doctor & Patient UI"
     },
     {
-      title: "2. API Gateway & Routing Layer (Express Router)",
-      desc: "RESTful architecture dividing leads, statistics, authentication, and contact controllers with custom validation middleware.",
-      icon: <Terminal size={22} className="layer-icon" />,
-      tag: "REST Server"
+      title: "2. HL7 / FHIR & ABDM Gateway",
+      desc: "National Health Authority (NHA) certified bridge for longitudinal ABHA health ID linking, insurance TPA claims, and lab analyzers.",
+      icon: <Network size={22} className="layer-icon" style={{ color: '#34d399' }} />,
+      tag: "Government & Hardware Sync"
     },
     {
-      title: "3. Controller & Business Logic",
-      desc: "Decoupled services handling request lifecycles, data sanitization, response formatting, and status code management.",
-      icon: <Code size={22} className="layer-icon" />,
-      tag: "Business Logic"
+      title: "3. Real-time Telemetry & Clinical Engine",
+      desc: "Sub-millisecond WebSockets broker for ICU multi-para monitors, ventilator alarms, smart OT scheduling, and AI drug interaction checks.",
+      icon: <Activity size={22} className="layer-icon" style={{ color: '#10b981' }} />,
+      tag: "Live ICU Stream"
     },
     {
-      title: "4. Model & Persistence Store",
-      desc: "Flexible data adapter structure ready to connect with MongoDB, PostgreSQL, or Redis cache layers with minimal config.",
-      icon: <Database size={22} className="layer-icon" />,
-      tag: "Data Store"
+      title: "4. HIPAA-Compliant Encrypted Data Lake",
+      desc: "Multi-tenant medical imaging PACS (DICOM) storage, automated discharge summaries, and AES-256 encrypted patient EHR vault.",
+      icon: <Database size={22} className="layer-icon" style={{ color: '#34d399' }} />,
+      tag: "EHR Medical Vault"
     }
   ];
 
@@ -36,18 +46,20 @@ export default function Architecture() {
         
         <div className="section-header">
           <div className="badge">
-            <Globe size={14} /> Clean Architecture
+            <ShieldCheck size={14} /> HIPAA & ABDM Certified Cloud
           </div>
-          <h2>Designed for Maintainability <span className="text-gradient">& Scalability</span></h2>
+          <h2>
+            Designed For Mission-Critical <span className="text-gradient">Hospital Reliability</span>
+          </h2>
           <p>
-            Explore how the frontend and backend interact seamlessly with a production-grade folder structure.
+            Explore how mediOS guarantees zero hospital downtime, ultra-secure patient EHR privacy, and seamless multi-branch scalability.
           </p>
         </div>
 
         <div className="architecture-content">
           
           <div className="layers-list">
-            {layers.map((layer, idx) => (
+            {hospitalLayers.map((layer, idx) => (
               <div key={idx} className="layer-card glass-card">
                 <div className="layer-header">
                   <div className="layer-icon-wrapper">
@@ -63,33 +75,26 @@ export default function Architecture() {
 
           <div className="tree-card glass-card">
             <div className="tree-header">
-              <span className="tree-title">📁 Project Structure Overview</span>
+              <span className="tree-title">🏥 mediOS Hospital Architecture Topology</span>
             </div>
             <pre className="tree-code">
               <code>
-{`landing-page/
-├── 📁 server/                # Express Backend
-│   ├── 📁 src/
-│   │   ├── 📁 controllers/   # Request Handlers
-│   │   │   └── apiController.js
-│   │   ├── 📁 middleware/    # Express Validator
-│   │   │   └── validators.js
-│   │   ├── 📁 models/        # Data Models
-│   │   │   └── mockData.js
-│   │   ├── 📁 routes/        # API Routes
-│   │   │   └── apiRoutes.js
-│   │   └── server.js         # Entry Point (:5000)
-│   └── package.json
+{`mediOS-Hospital-Ecosystem/
+├── 🌐 Clinical Presentation Tier
+│   ├── 🩺 OPD Doctor Workstation & Telemedicine
+│   ├── 🛏️ IPD Ward & Bed Allocation Matrix
+│   ├── 💊 Central Pharmacy & Inventory Dispatch
+│   └── 🔬 Diagnostic Lab (LIMS Analyzer Bridge)
 │
-├── 📁 client/                # React Frontend
-│   ├── 📁 src/
-│   │   ├── 📁 components/    # UI Components
-│   │   ├── 📁 services/      # API Handlers
-│   │   ├── 📁 styles/        # CSS Design System
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── package.json
-└── package.json              # Root Concurrently runner`}
+├── 🛡️ ABDM & Security Gateway
+│   ├── 🆔 ABHA ID Generation & Health Locker Sync
+│   ├── 📜 NABH Clinical Quality Indicator Audit
+│   └── 🔐 End-to-End AES-256 Patient EHR Vault
+│
+└── ⚡ Real-time Telemetry & Microservices
+    ├── 💓 ICU Multi-Para Monitor WebSocket Broker
+    ├── 🤖 AI Diagnostic & Drug Conflict Engine
+    └── 🏢 Central Multi-Branch Hospital Cloud Sync`}
               </code>
             </pre>
           </div>
@@ -100,3 +105,4 @@ export default function Architecture() {
     </section>
   );
 }
+

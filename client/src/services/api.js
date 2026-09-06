@@ -83,5 +83,163 @@ export const apiService = {
       body: JSON.stringify(formData)
     });
     return await response.json();
+  },
+
+  // ===== ADMIN API METHODS =====
+  adminLogin: async (credentials) => {
+    const response = await fetch(`${API_BASE_URL}/admin/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    });
+    return await response.json();
+  },
+
+  updateStats: async (stats) => {
+    const response = await fetch(`${API_BASE_URL}/admin/stats`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(stats)
+    });
+    return await response.json();
+  },
+
+  addTestimonial: async (testimonial) => {
+    const response = await fetch(`${API_BASE_URL}/admin/testimonials`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(testimonial)
+    });
+    return await response.json();
+  },
+
+  deleteTestimonial: async (id) => {
+    const response = await fetch(`${API_BASE_URL}/admin/testimonials/${id}`, {
+      method: 'DELETE'
+    });
+    return await response.json();
+  },
+
+  getLeads: async () => {
+    const response = await fetch(`${API_BASE_URL}/admin/leads`);
+    return await response.json();
+  },
+
+  deleteLead: async (id) => {
+    const response = await fetch(`${API_BASE_URL}/admin/leads/${id}`, {
+      method: 'DELETE'
+    });
+    return await response.json();
+  },
+
+  // Dynamic Announcements & Content
+  getBanner: async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/banner`);
+      return await res.json();
+    } catch {
+      return { success: true, data: { enabled: true, badgeText: "🚀 NEW V2 RELEASE", message: "LiveHost 2.0 is now live!", linkText: "Learn More", linkUrl: "#features" } };
+    }
+  },
+
+  updateBanner: async (banner) => {
+    const res = await fetch(`${API_BASE_URL}/admin/banner`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(banner)
+    });
+    return await res.json();
+  },
+
+  // Dynamic Pricing
+  getPricing: async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/pricing`);
+      return await res.json();
+    } catch {
+      return { success: true, data: [] };
+    }
+  },
+
+  updatePricingPlan: async (id, plan) => {
+    const res = await fetch(`${API_BASE_URL}/admin/pricing/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(plan)
+    });
+    return await res.json();
+  },
+
+  // FAQs
+  getFaqs: async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/faqs`);
+      return await res.json();
+    } catch {
+      return { success: true, data: [] };
+    }
+  },
+
+  addFaq: async (faq) => {
+    const res = await fetch(`${API_BASE_URL}/admin/faqs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(faq)
+    });
+    return await res.json();
+  },
+
+  deleteFaq: async (id) => {
+    const res = await fetch(`${API_BASE_URL}/admin/faqs/${id}`, { method: 'DELETE' });
+    return await res.json();
+  },
+
+  // Site Settings & Maintenance Mode
+  getSettings: async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/settings`);
+      return await res.json();
+    } catch {
+      return { success: true, data: { siteName: "NovaStack", supportEmail: "support@novastack.io", maintenanceMode: false, allowRegistrations: true } };
+    }
+  },
+
+  updateSettings: async (settings) => {
+    const res = await fetch(`${API_BASE_URL}/admin/settings`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settings)
+    });
+    return await res.json();
+  },
+
+  // Activity Logs
+  getLogs: async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/admin/logs`);
+      return await res.json();
+    } catch {
+      return { success: true, data: [] };
+    }
+  },
+
+  getContactMessages: async () => {
+    const response = await fetch(`${API_BASE_URL}/admin/contact`);
+    return await response.json();
+  },
+
+  deleteContactMessage: async (id) => {
+    const response = await fetch(`${API_BASE_URL}/admin/contact/${id}`, {
+      method: 'DELETE'
+    });
+    return await response.json();
   }
 };
+
+

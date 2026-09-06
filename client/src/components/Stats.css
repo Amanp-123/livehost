@@ -32,10 +32,10 @@
   border: 1px solid var(--border-light);
 }
 
-.stat-icon-users { color: #6366f1; }
-.stat-icon-uptime { color: #10b981; }
-.stat-icon-satisfaction { color: #ec4899; }
-.stat-icon-modules { color: #06b6d4; }
+.stat-icon-users { color: #10b981; }
+.stat-icon-uptime { color: #f97316; }
+.stat-icon-satisfaction { color: #f59e0b; }
+.stat-icon-modules { color: #14b8a6; }
 
 .stat-pulse {
   width: 8px;

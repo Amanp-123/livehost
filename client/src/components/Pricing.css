@@ -79,9 +79,9 @@
 }
 
 .popular-card {
-  border-color: var(--accent-primary);
-  box-shadow: 0 20px 45px -10px rgba(99, 102, 241, 0.35);
-  background: linear-gradient(180deg, rgba(30, 41, 78, 0.8) 0%, rgba(18, 24, 48, 0.75) 100%);
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 20px 45px -10px rgba(16, 185, 129, 0.25);
+  background: #ffffff;
   transform: scale(1.03);
 }
 
@@ -94,7 +94,7 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: white;
   padding: 4px 14px;
   border-radius: var(--radius-full);
@@ -103,8 +103,9 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
 }
+
 
 .plan-header {
   margin-bottom: 24px;
@@ -179,8 +180,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgba(99, 102, 241, 0.2);
-  color: #818cf8;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
   display: flex;
   align-items: center;
   justify-content: center;
