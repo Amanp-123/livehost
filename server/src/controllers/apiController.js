@@ -1,11 +1,11 @@
-const { 
-  statsData, 
+const {
+  statsData,
   bannerAnnouncement,
   siteSettings,
   plansData,
   faqsData,
-  testimonialsData, 
-  leadsData, 
+  testimonialsData,
+  leadsData,
   contactMessages,
   activityLogs
 } = require('../models/mockData');
@@ -213,7 +213,7 @@ const deleteTestimonial = (req, res) => {
 const createLead = (req, res) => {
   try {
     const { email } = req.body;
-    
+
     // Check if email already registered
     const existing = leadsData.find(lead => lead.email === email);
     if (existing) {

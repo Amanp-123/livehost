@@ -73,9 +73,9 @@ export default function AdminLogin({ onLoginSuccess, onBackToLanding }) {
             <label>Email Address</label>
             <div className="input-with-icon">
               <Mail size={18} className="input-icon" />
-              <input 
-                type="email" 
-                placeholder="admin@example.com" 
+              <input
+                type="email"
+                placeholder="admin@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -87,9 +87,9 @@ export default function AdminLogin({ onLoginSuccess, onBackToLanding }) {
             <label>Password</label>
             <div className="input-with-icon">
               <Lock size={18} className="input-icon" />
-              <input 
-                type="password" 
-                placeholder="••••••••" 
+              <input
+                type="password"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -97,9 +97,9 @@ export default function AdminLogin({ onLoginSuccess, onBackToLanding }) {
             </div>
           </div>
 
-          <button 
-            type="submit" 
-            className="admin-submit-btn" 
+          <button
+            type="submit"
+            className="admin-submit-btn"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -114,8 +114,8 @@ export default function AdminLogin({ onLoginSuccess, onBackToLanding }) {
         </form>
 
         <div className="admin-footer-links">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="back-to-site-btn"
             onClick={onBackToLanding}
           >

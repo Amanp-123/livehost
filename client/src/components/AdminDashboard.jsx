@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  BarChart3, 
-  MessageSquareQuote, 
-  Users, 
-  Mail, 
-  LogOut, 
-  Plus, 
-  Trash2, 
-  Save, 
-  ExternalLink, 
-  CheckCircle2, 
+import {
+  BarChart3,
+  MessageSquareQuote,
+  Users,
+  Mail,
+  LogOut,
+  Plus,
+  Trash2,
+  Save,
+  ExternalLink,
+  CheckCircle2,
   RefreshCw,
   Clock,
   Sparkles,
@@ -88,14 +88,14 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
     setLoading(true);
     try {
       const [
-        statsRes, 
-        testRes, 
-        leadsRes, 
-        msgRes, 
-        bannerRes, 
-        pricingRes, 
-        faqsRes, 
-        settingsRes, 
+        statsRes,
+        testRes,
+        leadsRes,
+        msgRes,
+        bannerRes,
+        pricingRes,
+        faqsRes,
+        settingsRes,
         logsRes
       ] = await Promise.all([
         apiService.getStats(),
@@ -321,8 +321,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
         <aside className="admin-sidebar">
           <div className="sidebar-menu">
             <div className="sidebar-group-title">CONTENT & MARKETING</div>
-            
-            <button 
+
+            <button
               className={`sidebar-link ${activeTab === 'stats' ? 'active' : ''}`}
               onClick={() => setActiveTab('stats')}
             >
@@ -330,7 +330,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <span>Live Statistics</span>
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'banner' ? 'active' : ''}`}
               onClick={() => setActiveTab('banner')}
             >
@@ -339,7 +339,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               {banner.enabled && <span className="status-dot-active"></span>}
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'pricing' ? 'active' : ''}`}
               onClick={() => setActiveTab('pricing')}
             >
@@ -347,7 +347,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <span>Pricing Plans</span>
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'testimonials' ? 'active' : ''}`}
               onClick={() => setActiveTab('testimonials')}
             >
@@ -356,7 +356,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <span className="pill-count">{testimonials.length}</span>
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'faqs' ? 'active' : ''}`}
               onClick={() => setActiveTab('faqs')}
             >
@@ -367,7 +367,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
             <div className="sidebar-group-title" style={{ marginTop: '14px' }}>CRM & INBOX</div>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'leads' ? 'active' : ''}`}
               onClick={() => setActiveTab('leads')}
             >
@@ -376,7 +376,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <span className="pill-count">{leads.length}</span>
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'messages' ? 'active' : ''}`}
               onClick={() => setActiveTab('messages')}
             >
@@ -387,7 +387,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
             <div className="sidebar-group-title" style={{ marginTop: '14px' }}>SYSTEM & SECURITY</div>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'settings' ? 'active' : ''}`}
               onClick={() => setActiveTab('settings')}
             >
@@ -395,7 +395,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <span>Site & Maintenance</span>
             </button>
 
-            <button 
+            <button
               className={`sidebar-link ${activeTab === 'logs' ? 'active' : ''}`}
               onClick={() => setActiveTab('logs')}
             >
@@ -437,9 +437,9 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
               <form onSubmit={handleUpdateStats} className="stats-grid-form">
                 <div className="stat-card-input">
                   <label>Active Global Users</label>
-                  <input 
-                    type="text" 
-                    value={stats.activeUsers} 
+                  <input
+                    type="text"
+                    value={stats.activeUsers}
                     onChange={(e) => setStats({ ...stats, activeUsers: e.target.value })}
                   />
                   <span className="hint">Featured in Hero & Stats banner</span>
@@ -447,9 +447,9 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                 <div className="stat-card-input">
                   <label>Uptime SLA</label>
-                  <input 
-                    type="text" 
-                    value={stats.uptime} 
+                  <input
+                    type="text"
+                    value={stats.uptime}
                     onChange={(e) => setStats({ ...stats, uptime: e.target.value })}
                   />
                   <span className="hint">Reliability score</span>
@@ -457,9 +457,9 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                 <div className="stat-card-input">
                   <label>Satisfaction Score</label>
-                  <input 
-                    type="text" 
-                    value={stats.satisfactionRate} 
+                  <input
+                    type="text"
+                    value={stats.satisfactionRate}
                     onChange={(e) => setStats({ ...stats, satisfactionRate: e.target.value })}
                   />
                   <span className="hint">Trust metric</span>
@@ -467,9 +467,9 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                 <div className="stat-card-input">
                   <label>Integrations Built</label>
-                  <input 
-                    type="text" 
-                    value={stats.integrations} 
+                  <input
+                    type="text"
+                    value={stats.integrations}
                     onChange={(e) => setStats({ ...stats, integrations: e.target.value })}
                   />
                   <span className="hint">API & Service connections</span>
@@ -502,10 +502,10 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                     <p>Show or hide the banner globally across the site.</p>
                   </div>
                   <label className="switch-container">
-                    <input 
-                      type="checkbox" 
-                      checked={banner.enabled} 
-                      onChange={(e) => setBanner({ ...banner, enabled: e.target.checked })} 
+                    <input
+                      type="checkbox"
+                      checked={banner.enabled}
+                      onChange={(e) => setBanner({ ...banner, enabled: e.target.checked })}
                     />
                     <span className="slider"></span>
                   </label>
@@ -514,16 +514,16 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                 <div className="form-row-2">
                   <div className="input-group">
                     <label>Badge Highlight Text</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={banner.badgeText}
                       onChange={(e) => setBanner({ ...banner, badgeText: e.target.value })}
                     />
                   </div>
                   <div className="input-group">
                     <label>Action Button Text</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={banner.linkText}
                       onChange={(e) => setBanner({ ...banner, linkText: e.target.value })}
                     />
@@ -532,8 +532,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                 <div className="input-group">
                   <label>Announcement Message</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={banner.message}
                     onChange={(e) => setBanner({ ...banner, message: e.target.value })}
                   />
@@ -541,8 +541,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                 <div className="input-group">
                   <label>Button Target URL / Section ID</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={banner.linkUrl}
                     onChange={(e) => setBanner({ ...banner, linkUrl: e.target.value })}
                   />
@@ -590,8 +590,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                     <div className="input-group">
                       <label>Hospital Plan Title</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={plan.name}
                         placeholder="e.g. Hospital Multi-Specialty"
                         onChange={(e) => {
@@ -603,8 +603,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                     <div className="input-group">
                       <label>Badge Highlight</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={plan.badge || ''}
                         placeholder="e.g. For Hospital Networks"
                         onChange={(e) => {
@@ -617,8 +617,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                     <div className="form-row-2">
                       <div className="input-group">
                         <label>Monthly Price ($/mo)</label>
-                        <input 
-                          type="number" 
+                        <input
+                          type="number"
                           value={plan.priceMonthly}
                           onChange={(e) => {
                             const updated = plans.map(p => p.id === plan.id ? { ...p, priceMonthly: e.target.value } : p);
@@ -628,8 +628,8 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                       </div>
                       <div className="input-group">
                         <label>Yearly Price ($/mo)</label>
-                        <input 
-                          type="number" 
+                        <input
+                          type="number"
                           value={plan.priceYearly}
                           onChange={(e) => {
                             const updated = plans.map(p => p.id === plan.id ? { ...p, priceYearly: e.target.value } : p);
@@ -641,7 +641,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                     <div className="input-group">
                       <label>Plan Scope & Target Institutions</label>
-                      <textarea 
+                      <textarea
                         rows={3}
                         value={plan.desc}
                         placeholder="Describe features, OPD/IPD beds, lab integrations..."
@@ -652,7 +652,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                       />
                     </div>
 
-                    <button 
+                    <button
                       type="button"
                       className="save-plan-btn"
                       onClick={() => handleUpdatePlan(plan.id, plan)}
@@ -684,20 +684,20 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                   <h3>Create New FAQ</h3>
                   <div className="input-group">
                     <label>Question</label>
-                    <input 
-                      type="text" 
-                      required 
-                      placeholder="e.g. Can I upgrade my plan later?" 
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Can I upgrade my plan later?"
                       value={newFaq.question}
                       onChange={(e) => setNewFaq({ ...newFaq, question: e.target.value })}
                     />
                   </div>
                   <div className="input-group">
                     <label>Answer</label>
-                    <textarea 
-                      rows={3} 
-                      required 
-                      placeholder="Explain in simple terms..." 
+                    <textarea
+                      rows={3}
+                      required
+                      placeholder="Explain in simple terms..."
                       value={newFaq.answer}
                       onChange={(e) => setNewFaq({ ...newFaq, answer: e.target.value })}
                     />
@@ -738,16 +738,16 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                 <div className="form-toggle-row danger-toggle">
                   <div>
                     <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <ShieldAlert size={18} color="#f87171" /> 
+                      <ShieldAlert size={18} color="#f87171" />
                       Emergency Maintenance Mode
                     </h4>
                     <p>When enabled, public visitors see an Under Maintenance overlay.</p>
                   </div>
                   <label className="switch-container">
-                    <input 
-                      type="checkbox" 
-                      checked={settings.maintenanceMode} 
-                      onChange={(e) => setSettings({ ...settings, maintenanceMode: e.target.checked })} 
+                    <input
+                      type="checkbox"
+                      checked={settings.maintenanceMode}
+                      onChange={(e) => setSettings({ ...settings, maintenanceMode: e.target.checked })}
                     />
                     <span className="slider danger"></span>
                   </label>
@@ -756,16 +756,16 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                 <div className="form-row-2">
                   <div className="input-group">
                     <label>Platform Brand Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={settings.siteName}
                       onChange={(e) => setSettings({ ...settings, siteName: e.target.value })}
                     />
                   </div>
                   <div className="input-group">
                     <label>Public Support Email</label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       value={settings.supportEmail}
                       onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
                     />
@@ -778,10 +778,10 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                     <p>Allow visitors to subscribe on the hero section.</p>
                   </div>
                   <label className="switch-container">
-                    <input 
-                      type="checkbox" 
-                      checked={settings.allowRegistrations} 
-                      onChange={(e) => setSettings({ ...settings, allowRegistrations: e.target.checked })} 
+                    <input
+                      type="checkbox"
+                      checked={settings.allowRegistrations}
+                      onChange={(e) => setSettings({ ...settings, allowRegistrations: e.target.checked })}
                     />
                     <span className="slider"></span>
                   </label>
@@ -827,7 +827,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                   <h2>Customer Testimonials</h2>
                   <p>Add, edit, or delete dynamic reviews shown in the Testimonials carousel.</p>
                 </div>
-                <button 
+                <button
                   className="add-new-btn"
                   onClick={() => setIsAddingTestimonial(!isAddingTestimonial)}
                 >
@@ -842,20 +842,20 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                   <div className="form-row-2">
                     <div className="input-group">
                       <label>Customer Name *</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         required
-                        placeholder="e.g. Neha Sharma" 
+                        placeholder="e.g. Neha Sharma"
                         value={newTestimonial.name}
                         onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
                       />
                     </div>
                     <div className="input-group">
                       <label>Job Title & Company *</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         required
-                        placeholder="e.g. VP of Engineering at TechCorp" 
+                        placeholder="e.g. VP of Engineering at TechCorp"
                         value={newTestimonial.role}
                         onChange={(e) => setNewTestimonial({ ...newTestimonial, role: e.target.value })}
                       />
@@ -865,16 +865,16 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                   <div className="form-row-2">
                     <div className="input-group">
                       <label>Avatar URL (Optional)</label>
-                      <input 
-                        type="url" 
-                        placeholder="https://images.unsplash.com/..." 
+                      <input
+                        type="url"
+                        placeholder="https://images.unsplash.com/..."
                         value={newTestimonial.avatar}
                         onChange={(e) => setNewTestimonial({ ...newTestimonial, avatar: e.target.value })}
                       />
                     </div>
                     <div className="input-group">
                       <label>Rating (1 to 5 Stars)</label>
-                      <select 
+                      <select
                         value={newTestimonial.rating}
                         onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: Number(e.target.value) })}
                       >
@@ -887,7 +887,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
                   <div className="input-group">
                     <label>Review / Feedback Comment *</label>
-                    <textarea 
+                    <textarea
                       rows={3}
                       required
                       placeholder="Share what they loved about the service..."
@@ -907,17 +907,17 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                 {testimonials.map((t) => (
                   <div key={t.id} className="admin-testimonial-item">
                     <div className="item-top">
-                      <img 
-                        src={t.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} 
-                        alt={t.name} 
-                        className="item-avatar" 
+                      <img
+                        src={t.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`}
+                        alt={t.name}
+                        className="item-avatar"
                       />
                       <div className="item-meta">
                         <h4>{t.name}</h4>
                         <p>{t.role}</p>
                         <span className="stars-pill">{'★'.repeat(t.rating || 5)}</span>
                       </div>
-                      <button 
+                      <button
                         className="delete-item-btn"
                         onClick={() => handleDeleteTestimonial(t.id)}
                       >
@@ -947,9 +947,9 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
 
               <div className="table-search-bar">
                 <Search size={16} className="search-icon" />
-                <input 
-                  type="text" 
-                  placeholder="Search subscriber by email..." 
+                <input
+                  type="text"
+                  placeholder="Search subscriber by email..."
                   value={leadSearch}
                   onChange={(e) => setLeadSearch(e.target.value)}
                 />
@@ -984,7 +984,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                             </div>
                           </td>
                           <td className="text-right">
-                            <button 
+                            <button
                               className="delete-item-btn"
                               onClick={() => handleDeleteLead(lead.id)}
                             >
@@ -1025,7 +1025,7 @@ export default function AdminDashboard({ user, onLogout, onGoToLanding }) {
                           <h4>{msg.name}</h4>
                           <a href={`mailto:${msg.email}`} className="msg-email">{msg.email}</a>
                         </div>
-                        <button 
+                        <button
                           className="delete-item-btn"
                           onClick={() => handleDeleteMessage(msg.id)}
                         >

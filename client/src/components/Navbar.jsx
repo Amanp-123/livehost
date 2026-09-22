@@ -29,6 +29,7 @@ export default function Navbar({ onOpenAdmin }) {
           <a href="#architecture" className="nav-link">Architecture</a>
           <a href="#stats" className="nav-link">Metrics</a>
           <a href="#pricing" className="nav-link">Pricing</a>
+          <a href="#faqs" className="nav-link">FAQ</a>
           <a href="#testimonials" className="nav-link">Reviews</a>
           <a href="#contact" className="nav-link">Contact</a>
         </nav>
@@ -62,6 +63,7 @@ export default function Navbar({ onOpenAdmin }) {
           <a href="#architecture" onClick={() => setMobileMenuOpen(false)}>Architecture</a>
           <a href="#stats" onClick={() => setMobileMenuOpen(false)}>Metrics</a>
           <a href="#pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
+          <a href="#faqs" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
           <a href="#testimonials" onClick={() => setMobileMenuOpen(false)}>Reviews</a>
           <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           <div className="mobile-actions">

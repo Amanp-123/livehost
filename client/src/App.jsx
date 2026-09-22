@@ -11,6 +11,9 @@ import Footer from './components/Footer';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 
+import Banner from './components/Banner';
+import FAQ from './components/FAQ';
+
 export default function App() {
   const getInitialView = () => {
     const path = window.location.pathname.toLowerCase();
@@ -111,6 +114,9 @@ export default function App() {
         <div className="ambient-blob-3"></div>
       </div>
 
+      {/* Announcement Banner */}
+      <Banner />
+
       <Navbar onOpenAdmin={handleOpenAdmin} />
       <main>
         <Hero />
@@ -118,6 +124,7 @@ export default function App() {
         <Features />
         <Architecture />
         <Pricing />
+        <FAQ />
         <Testimonials />
         <Contact />
       </main>

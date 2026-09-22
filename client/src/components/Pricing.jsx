@@ -1,62 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Check, Sparkles, HelpCircle } from 'lucide-react';
+import { apiService } from '../services/api';
 import './Pricing.css';
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const plans = [
-    {
-      name: "Starter Developer",
-      badge: "For Solo Makers",
-      priceMonthly: 19,
-      priceYearly: 14,
-      desc: "Perfect for indie hackers and developers starting new side projects.",
-      features: [
-        "Full React + Express Source Code",
-        "MVC Backend Setup",
-        "Lead Capture & Contact API",
-        "Community Support",
-        "Unlimited Personal Projects"
-      ],
-      popular: false,
-      cta: "Get Started"
-    },
-    {
-      name: "Growth Pro",
-      badge: "Most Popular",
-      priceMonthly: 49,
-      priceYearly: 39,
-      desc: "Ideal for growing startups needing production-grade scalability.",
-      features: [
-        "Everything in Starter Developer",
-        "Express Validator & Auth middleware",
-        "Database Adapters (Mongo/PostgreSQL)",
-        "Priority 24/7 Slack Support",
-        "Free Lifetime Architecture Updates",
-        "Commercial SaaS License"
-      ],
-      popular: true,
-      cta: "Upgrade to Pro"
-    },
-    {
-      name: "Enterprise Scale",
-      badge: "For Teams",
-      priceMonthly: 129,
-      priceYearly: 99,
-      desc: "Custom architectures, microservices, and dedicated engineering onboarding.",
-      features: [
-        "Everything in Growth Pro",
-        "Custom Controller & Route Generator",
-        "Docker & Kubernetes Configs",
-        "Dedicated System Architect",
-        "99.99% Uptime SLA Guarantee",
-        "Custom Integration Support"
-      ],
-      popular: false,
-      cta: "Contact Enterprise"
-    }
-  ];
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const res = await apiService.getPricing();
+        if (res && res.success && res.data && res.data.length > 0) {
+          setPlans(res.data);
+        } else {
+          // Fallback if empty
+          setPlans([
+            {
+              id: 1,
+              name: "Clinic & Polyclinic",
+              badge: "For Solo / Group Clinics",
+              priceMonthly: 89,
+              priceYearly: 69,
+              desc: "Complete OPD queuing, digital e-prescriptions, WhatsApp patient updates, and billing.",
+              popular: false,
+              cta: "Start Clinic Trial"
+            },
+            {
+              id: 2,
+              name: "Hospital Multi-Specialty",
+              badge: "Most Popular",
+              priceMonthly: 299,
+              priceYearly: 249,
+              desc: "Full OPD/IPD beds management, OT Scheduling, LIMS Lab & Pharmacy sync, NABH reports.",
+              popular: true,
+              cta: "Schedule Hospital Onboarding"
+            },
+            {
+              id: 3,
+              name: "Enterprise Hospital Chain",
+              badge: "For Hospital Networks",
+              priceMonthly: 799,
+              priceYearly: 649,
+              desc: "Multi-branch EHR centralization, AI Diagnostic Copilot, custom HL7/FHIR integrations, and 24/7 dedicated clinical support.",
+              popular: false,
+              cta: "Contact Enterprise Healthcare"
+            }
+          ]);
+        }
+      } catch (err) {
+        console.error("Failed to load pricing plans", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPricing();
+  }, []);
 
   return (
     <section className="section" id="pricing">
@@ -64,11 +64,11 @@ export default function Pricing() {
 
         <div className="section-header">
           <div className="badge">
-            <Sparkles size={14} /> Transparent Pricing
+            <Sparkles size={14} /> Transparent Healthcare Pricing
           </div>
-          <h2>Simple, Predictable <span className="text-gradient">Plans For Everyone</span></h2>
+          <h2>Hospital & Clinic <span className="text-gradient">Subscription Plans</span></h2>
           <p>
-            Choose the package that aligns with your scale. Upgrade or downgrade anytime with 0 hidden fees.
+            Choose the package that aligns with your clinical institution. Upgrade or scale departments anytime with zero hidden fees.
           </p>
 
           {/* Toggle Switch */}
@@ -82,22 +82,27 @@ export default function Pricing() {
               <div className="switch-thumb"></div>
             </button>
             <span className={`toggle-label ${isYearly ? 'active' : ''}`}>
-              Yearly <span className="discount-pill">Save 25%</span>
+              Yearly <span className="discount-pill">Save 20%</span>
             </span>
           </div>
         </div>
 
         <div className="pricing-grid">
           {plans.map((plan, index) => (
-            <div key={index} className={`pricing-card glass-card ${plan.popular ? 'popular-card' : ''}`}>
+            <div key={plan.id || index} className={`pricing-card glass-card ${plan.popular ? 'popular-card' : ''}`}>
               {plan.popular && (
                 <div className="popular-badge">
-                  <Sparkles size={13} /> {plan.badge}
+                  <Sparkles size={13} /> {plan.badge || 'Most Popular'}
                 </div>
               )}
               
               <div className="plan-header">
                 <h3 className="plan-name">{plan.name}</h3>
+                {plan.badge && !plan.popular && (
+                  <span style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: '600', display: 'block', marginBottom: '6px' }}>
+                    {plan.badge}
+                  </span>
+                )}
                 <p className="plan-desc">{plan.desc}</p>
               </div>
 
@@ -110,23 +115,44 @@ export default function Pricing() {
               </div>
 
               <a 
-                href="#contact" 
+                href="#early-access" 
                 className={`btn plan-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
               >
-                {plan.cta}
+                {plan.cta || "Request Demo"}
               </a>
 
               <div className="plan-divider"></div>
 
               <ul className="plan-features">
-                {plan.features.map((feat, fIdx) => (
-                  <li key={fIdx}>
-                    <div className="check-box">
-                      <Check size={14} />
-                    </div>
-                    <span>{feat}</span>
-                  </li>
-                ))}
+                {plan.features ? (
+                  plan.features.map((feat, fIdx) => (
+                    <li key={fIdx}>
+                      <div className="check-box">
+                        <Check size={14} />
+                      </div>
+                      <span>{feat}</span>
+                    </li>
+                  ))
+                ) : (
+                  <>
+                    <li>
+                      <div className="check-box"><Check size={14} /></div>
+                      <span>EHR & ABDM M1/M2/M3 Compliance</span>
+                    </li>
+                    <li>
+                      <div className="check-box"><Check size={14} /></div>
+                      <span>Smart Patient Queuing & Vitals Sync</span>
+                    </li>
+                    <li>
+                      <div className="check-box"><Check size={14} /></div>
+                      <span>Automated Invoicing & NABH Audit Logs</span>
+                    </li>
+                    <li>
+                      <div className="check-box"><Check size={14} /></div>
+                      <span>24/7 Clinical & IT Support</span>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           ))}
