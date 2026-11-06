@@ -8,7 +8,7 @@ Modern, production-grade landing page built with **React (Vite)** frontend and *
 
 ```
 landing-page/
-├── server/                       # Backend (Express API)
+├── backend/                      # Backend (Express API)
 │   ├── src/
 │   │   ├── controllers/          # Business logic handlers
 │   │   │   └── apiController.js
@@ -22,7 +22,7 @@ landing-page/
 │   ├── .env
 │   └── package.json
 │
-├── client/                       # Frontend (React + Vite)
+├── frontend/                     # Frontend (React + Vite)
 │   ├── src/
 │   │   ├── components/           # Modular UI Components (Hero, Navbar, Features, Pricing, etc.)
 │   │   ├── services/             # API Service layer (Fetch wrapper)
