@@ -5,11 +5,41 @@
 # Dependencies (Never deploy to Vercel/Git)
 node_modules/
 */node_modules/
+frontend/node_modules/
 client/node_modules/
+backend/node_modules/
 server/node_modules/
 .pnpm-store/
 
+<<<<<<< HEAD
 # Local Environment Variables & Secrets (CRITICAL: Never commit credentials)
+=======
+<<<<<<< Updated upstream
+# Production / Build Output
+=======
+# Local Environment Variables & Secrets (CRITICAL: Never commit credentials)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+frontend/.env
+client/.env
+backend/.env
+server/.env
+*.pem
+*.key
+
+# Local Build & Dist Outputs (Vercel builds on cloud directly)
+>>>>>>> Stashed changes
+dist/
+build/
+frontend/dist/
+client/dist/
+
+# Environment variables
+>>>>>>> 76904f2f75e0093ff63e9e201754fba44bbb2a2f
 .env
 .env.local
 .env.development.local
